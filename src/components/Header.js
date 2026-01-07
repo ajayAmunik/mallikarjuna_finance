@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { gsap } from "gsap";
 
 export default function Header() {
@@ -10,9 +11,8 @@ export default function Header() {
   const navRef = useRef(null);
 
   useEffect(() => {
-    // Ensure header is visible, then animate
+    // Animate header on mount
     if (headerRef.current) {
-      gsap.set(headerRef.current, { opacity: 1, y: 0 });
       gsap.from(headerRef.current, {
         y: -50,
         opacity: 0,
@@ -24,7 +24,6 @@ export default function Header() {
     if (navRef.current) {
       const children = Array.from(navRef.current.children);
       children.forEach((child, index) => {
-        gsap.set(child, { opacity: 1, y: 0 });
         gsap.from(child, {
           opacity: 0,
           y: -10,
@@ -62,12 +61,26 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-3">
             <button
               onClick={() => scrollToSection("home")}
-              className="text-xl sm:text-2xl font-bold text-blue-900 hover:text-blue-700 transition-colors"
+              className="flex items-center space-x-2"
             >
-              Mallikarjuna FinCorp
+              {/* Logo */}
+              <div className="relative h-12 w-12 sm:h-16 sm:w-16 rounded-full overflow-hidden bg-white">
+                <Image
+                  src="/logo.jpeg"
+                  alt="Mallikarjuna FinCorp logo"
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 640px) 48px, 64px"
+                />
+              </div>
+              {/* Brand text */}
+              <span className="text-lg sm:text-xl md:text-2xl font-bold text-blue-900 hover:text-blue-700 transition-colors">
+                Mallikarjuna FinCorp
+              </span>
             </button>
           </div>
           <div ref={navRef} className="hidden md:flex items-center space-x-8">

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import Image from "next/image";
 
 export default function Hero() {
   const heroRef = useRef(null);
@@ -61,24 +62,48 @@ export default function Hero() {
     <section
       ref={heroRef}
       id="home"
-      className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 via-white to-blue-50 min-h-screen flex items-center"
+      className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto text-center w-full">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-br from-blue-50 via-white">
+        <Image
+          src="/finance-bg.jpeg"
+          alt="Finance background"
+          fill
+          className="object-cover"
+          priority
+          quality={90}
+          sizes="100vw"
+          style={{
+            objectPosition: "center",
+          }}
+          onError={(e) => {
+            // Hide image if it fails to load, fallback gradient will show
+            e.target.style.display = "none";
+          }}
+        />
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/70 via-blue-800/60 to-blue-900/70"></div>
+        <div className="absolute inset-0 bg-white/20"></div>
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 max-w-7xl mx-auto text-center w-full">
         <h1
           ref={titleRef}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-blue-900 mb-4 leading-tight"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight drop-shadow-lg"
         >
           Mallikarjuna FinCorp
         </h1>
         <p
           ref={taglineRef}
-          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-700 font-medium mb-6"
+          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white font-medium mb-6 drop-shadow-md"
         >
           We Stand By You
         </p>
         <p
           ref={descRef}
-          className="mt-6 text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4"
+          className="mt-6 text-base sm:text-lg md:text-xl text-white/95 max-w-3xl mx-auto leading-relaxed px-4 drop-shadow-md"
         >
           Your trusted financial partner for chit funds, money transfers,
           investments, and loans. Empowering your financial future with
@@ -102,7 +127,7 @@ export default function Hero() {
               const element = document.getElementById("contact");
               element?.scrollIntoView({ behavior: "smooth" });
             }}
-            className="px-8 py-3 bg-white text-blue-900 border-2 border-blue-900 rounded-full font-semibold hover:bg-blue-50 transition-all duration-300 transform hover:scale-105"
+            className="px-8 py-3 bg-white/95 text-blue-900 border-2 border-white rounded-full font-semibold hover:bg-white transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
             Contact Us
           </button>
