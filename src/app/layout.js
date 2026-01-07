@@ -16,6 +16,11 @@ export const metadata = {
   title: "Mallikarjuna FinCorp - We Stand By You",
   description:
     "Your trusted financial partner for chit funds, money transfers, investments, and loans. Empowering your financial future with transparency and reliability.",
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({ children }) {

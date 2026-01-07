@@ -69,7 +69,7 @@ export default function Header() {
               {/* Logo */}
               <div className="relative h-12 w-12 sm:h-16 sm:w-16 rounded-full overflow-hidden bg-white">
                 <Image
-                  src="/logo.jpeg"
+                  src="/logo.png"
                   alt="Mallikarjuna FinCorp logo"
                   fill
                   className="object-cover"
