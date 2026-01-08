@@ -11,28 +11,39 @@ export default function Header() {
   const navRef = useRef(null);
 
   useEffect(() => {
-    // Animate header on mount
+    // Ensure header is visible first
     if (headerRef.current) {
-      gsap.from(headerRef.current, {
-        y: -50,
-        opacity: 0,
-        duration: 0.6,
-        ease: "power3.out",
-      });
+      gsap.set(headerRef.current, { opacity: 1, y: 0 });
     }
 
-    if (navRef.current) {
-      const children = Array.from(navRef.current.children);
-      children.forEach((child, index) => {
-        gsap.from(child, {
+    // Small delay to ensure elements are mounted
+    const timer = setTimeout(() => {
+      // Animate header on mount
+      if (headerRef.current) {
+        gsap.from(headerRef.current, {
+          y: -50,
           opacity: 0,
-          y: -10,
-          duration: 0.4,
-          delay: 0.2 + index * 0.1,
-          ease: "power2.out",
+          duration: 0.6,
+          ease: "power3.out",
         });
-      });
-    }
+      }
+
+      if (navRef.current) {
+        const children = Array.from(navRef.current.children);
+        children.forEach((child, index) => {
+          gsap.set(child, { opacity: 1, y: 0 });
+          gsap.from(child, {
+            opacity: 0,
+            y: -10,
+            duration: 0.4,
+            delay: 0.2 + index * 0.1,
+            ease: "power2.out",
+          });
+        });
+      }
+    }, 50);
+
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {

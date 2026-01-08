@@ -12,50 +12,70 @@ export default function Hero() {
   const buttonsRef = useRef(null);
 
   useEffect(() => {
-    // Ensure elements are visible first
-    if (titleRef.current) gsap.set(titleRef.current, { opacity: 1, y: 0 });
-    if (taglineRef.current) gsap.set(taglineRef.current, { opacity: 1, y: 0 });
-    if (descRef.current) gsap.set(descRef.current, { opacity: 1, y: 0 });
-    if (buttonsRef.current) gsap.set(buttonsRef.current, { opacity: 1, y: 0 });
+    // Ensure elements are visible first as fallback
+    if (titleRef.current) {
+      gsap.set(titleRef.current, { opacity: 1, y: 0 });
+    }
+    if (taglineRef.current) {
+      gsap.set(taglineRef.current, { opacity: 1, y: 0 });
+    }
+    if (descRef.current) {
+      gsap.set(descRef.current, { opacity: 1, y: 0 });
+    }
+    if (buttonsRef.current) {
+      gsap.set(buttonsRef.current, { opacity: 1, y: 0 });
+    }
 
-    const tl = gsap.timeline();
+    // Small delay to ensure elements are mounted
+    const timer = setTimeout(() => {
+      if (
+        titleRef.current &&
+        taglineRef.current &&
+        descRef.current &&
+        buttonsRef.current
+      ) {
+        const tl = gsap.timeline();
 
-    tl.from(titleRef.current, {
-      y: 30,
-      opacity: 0,
-      duration: 0.8,
-      ease: "power3.out",
-    })
-      .from(
-        taglineRef.current,
-        {
-          y: 20,
+        tl.from(titleRef.current, {
+          y: 30,
           opacity: 0,
-          duration: 0.6,
-          ease: "power2.out",
-        },
-        "-=0.4"
-      )
-      .from(
-        descRef.current,
-        {
-          y: 20,
-          opacity: 0,
-          duration: 0.6,
-          ease: "power2.out",
-        },
-        "-=0.3"
-      )
-      .from(
-        buttonsRef.current,
-        {
-          y: 20,
-          opacity: 0,
-          duration: 0.6,
-          ease: "power2.out",
-        },
-        "-=0.3"
-      );
+          duration: 0.8,
+          ease: "power3.out",
+        })
+          .from(
+            taglineRef.current,
+            {
+              y: 20,
+              opacity: 0,
+              duration: 0.6,
+              ease: "power2.out",
+            },
+            "-=0.4"
+          )
+          .from(
+            descRef.current,
+            {
+              y: 20,
+              opacity: 0,
+              duration: 0.6,
+              ease: "power2.out",
+            },
+            "-=0.3"
+          )
+          .from(
+            buttonsRef.current,
+            {
+              y: 20,
+              opacity: 0,
+              duration: 0.6,
+              ease: "power2.out",
+            },
+            "-=0.3"
+          );
+      }
+    }, 50);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -92,18 +112,21 @@ export default function Hero() {
         <h1
           ref={titleRef}
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight drop-shadow-lg"
+          style={{ opacity: 1 }}
         >
           Mallikarjuna FinCorp
         </h1>
         <p
           ref={taglineRef}
           className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white font-medium mb-6 drop-shadow-md"
+          style={{ opacity: 1 }}
         >
           We Stand By You
         </p>
         <p
           ref={descRef}
           className="mt-6 text-base sm:text-lg md:text-xl text-white/95 max-w-3xl mx-auto leading-relaxed px-4 drop-shadow-md"
+          style={{ opacity: 1 }}
         >
           Your trusted financial partner for chit funds, money transfers,
           investments, and loans. Empowering your financial future with
@@ -112,6 +135,7 @@ export default function Hero() {
         <div
           ref={buttonsRef}
           className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center"
+          style={{ opacity: 1 }}
         >
           <button
             onClick={() => {
