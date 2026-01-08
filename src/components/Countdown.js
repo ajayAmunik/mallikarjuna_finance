@@ -145,7 +145,7 @@ export default function Countdown() {
           <p className="text-sm sm:text-base md:text-lg lg:text-xl font-medium px-4">
             Launch Date:{" "}
             <span className="font-bold text-white block sm:inline mt-1 sm:mt-0">
-              January 20, 2026 at 6:00 PM
+              January 10, 2026 at 6:00 PM
             </span>
           </p>
         </div>
