@@ -208,7 +208,7 @@ export default function AboutUs() {
                       <p className="text-sm font-medium text-gray-900 group-hover:text-blue-900">
                         mallikarjunafincorp@gmail.com
                       </p>
-                      <p className="text-xs text-gray-500">Send us an email</p>
+                      <p className="text-xs text-gray-500">We respond 24/7</p>
                     </div>
                   </a>
 
@@ -232,7 +232,7 @@ export default function AboutUs() {
                       <p className="text-sm font-medium text-gray-900 group-hover:text-green-700">
                         8008036253
                       </p>
-                      <p className="text-xs text-gray-500">Chat on WhatsApp</p>
+                      <p className="text-xs text-gray-500">We respond 24/7</p>
                     </div>
                   </a>
                 </div>

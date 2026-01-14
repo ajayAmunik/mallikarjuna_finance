@@ -53,7 +53,7 @@ export default function Contact() {
                 8008036253
               </a>
               <p className="mt-4 text-gray-600 text-sm sm:text-base">
-                Available Monday - Saturday, 9 AM - 6 PM
+                We respond 24/7
               </p>
             </div>
           </div>
@@ -78,7 +78,7 @@ export default function Contact() {
                 mallikarjunafincorp@gmail.com
               </a>
               <p className="mt-4 text-gray-600 text-sm sm:text-base">
-                We'll respond within 24 hours
+                We respond 24/7
               </p>
             </div>
           </div>
