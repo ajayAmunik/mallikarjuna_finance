@@ -257,7 +257,7 @@ export default function Header() {
                 >
                   Services
                 </button>
-                <div className="ml-4 mt-2 space-y-2">
+                <div className="ml-4 mt-2 space-y-2 flex flex-col">
                   <button
                     onClick={() => scrollToSection("chit-funds")}
                     className="text-sm text-gray-600 hover:text-blue-900 transition-colors text-left"
