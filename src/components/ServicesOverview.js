@@ -91,58 +91,36 @@ export default function ServicesOverview() {
           </p>
         </div>
 
-        {/* Service Cards with Images */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        {/* Service Cards - Rectangular with Full Image */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {services.map((service, index) => {
-            const Icon = service.Icon;
             return (
               <div
                 key={service.id}
                 data-aos="fade-up"
                 data-aos-delay={index * 100}
                 onClick={() => scrollToSection(service.id)}
-                className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden border border-gray-100 hover:border-blue-300 transform hover:-translate-y-2 group"
+                className="relative rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden border border-gray-200 hover:border-blue-300 transform hover:-translate-y-1 group h-64 sm:h-72"
               >
-                {/* Image Section */}
-                <div className="relative h-48 sm:h-56 overflow-hidden">
+                {/* Full Background Image */}
+                <div className="absolute inset-0">
                   <Image
                     src={service.image}
                     alt={service.title}
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-300"
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/60 to-transparent"></div>
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="p-2 bg-white/90 backdrop-blur-sm rounded-lg inline-flex">
-                      <Icon className="w-8 h-8 sm:w-10 sm:h-10 text-blue-900" />
-                    </div>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400/40 via-blue-500/35 to-blue-600/40"></div>
                 </div>
 
-                {/* Content Section */}
-                <div className="p-6 sm:p-8">
-                  <h3 className="text-lg sm:text-xl font-bold text-blue-900 mb-3 text-center">
+                {/* Left Side - Text Content Overlay */}
+                <div className="relative h-full flex flex-col justify-center p-6 sm:p-8 w-1/2">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4 group-hover:text-blue-100 transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-gray-700 text-sm sm:text-base text-center leading-relaxed mb-4">
+                  <p className="text-white/95 text-base sm:text-lg leading-relaxed">
                     {service.description}
                   </p>
-                  <div className="flex items-center justify-center text-blue-900 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span className="text-sm font-medium">Learn more</span>
-                    <svg
-                      className="w-4 h-4 ml-1"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </div>
                 </div>
               </div>
             );

@@ -5,6 +5,7 @@ import { ChitFundIcon, CheckIcon } from "./Icons";
 
 export default function ChitFunds() {
   const [activeTab, setActiveTab] = useState("scheme1");
+  const [showAllCards, setShowAllCards] = useState(false);
 
   const schemes = [
     {
@@ -101,6 +102,12 @@ export default function ChitFunds() {
 
   const activeScheme = schemes.find((scheme) => scheme.id === activeTab);
 
+  // Reset showAllCards when tab changes
+  const handleTabChange = (tabId) => {
+    setActiveTab(tabId);
+    setShowAllCards(false);
+  };
+
   return (
     <section
       id="chit-funds"
@@ -125,7 +132,7 @@ export default function ChitFunds() {
             {schemes.map((scheme) => (
               <button
                 key={scheme.id}
-                onClick={() => setActiveTab(scheme.id)}
+                onClick={() => handleTabChange(scheme.id)}
                 className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-base font-medium transition-all duration-300 ${
                   activeTab === scheme.id
                     ? "bg-blue-600 text-white shadow-lg transform scale-105"
@@ -163,7 +170,10 @@ export default function ChitFunds() {
 
               {/* Cards Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
-                {activeScheme.data.map((row, index) => (
+                {(showAllCards
+                  ? activeScheme.data
+                  : activeScheme.data.slice(0, 5)
+                ).map((row, index) => (
                   <div
                     key={row.month}
                     className={`bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-3 sm:p-4 border-2 ${
@@ -195,6 +205,18 @@ export default function ChitFunds() {
                   </div>
                 ))}
               </div>
+
+              {/* View More Button */}
+              {activeScheme.data.length > 5 && (
+                <div className="mt-6 flex justify-center">
+                  <button
+                    onClick={() => setShowAllCards(!showAllCards)}
+                    className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+                  >
+                    {showAllCards ? "View Less" : "View More"}
+                  </button>
+                </div>
+              )}
             </div>
           )}
         </div>
