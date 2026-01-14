@@ -75,47 +75,6 @@ export default function Contact() {
             </div>
           </div>
         </div>
-
-        {/* Services List */}
-        <div
-          data-aos="fade-up"
-          data-aos-delay="400"
-          className="mt-12 bg-gray-50 p-8 rounded-2xl"
-        >
-          <h3 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
-            Our Services
-          </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
-            <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-              <div className="text-2xl mb-2">💰</div>
-              <p className="text-sm sm:text-base font-medium text-gray-700">
-                Chit Funds
-              </p>
-            </div>
-            <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-              <div className="text-2xl mb-2">💳</div>
-              <p className="text-sm sm:text-base font-medium text-gray-700">
-                Money Transfers
-              </p>
-            </div>
-            <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-              <div className="text-2xl mb-2">📈</div>
-              <p className="text-sm sm:text-base font-medium text-gray-700">
-                Investments
-              </p>
-            </div>
-            <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-              <div className="text-2xl mb-2">🏦</div>
-              <p className="text-sm sm:text-base font-medium text-gray-700">
-                Loans
-              </p>
-            </div>
-          </div>
-          <p className="text-center text-gray-600 mt-6 text-sm sm:text-base">
-            We're here to help you achieve your financial goals with
-            transparency and trust.
-          </p>
-        </div>
       </div>
     </section>
   );
