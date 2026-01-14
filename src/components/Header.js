@@ -7,27 +7,14 @@ import { gsap } from "gsap";
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const headerRef = useRef(null);
   const navRef = useRef(null);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
-    // Ensure header is visible first
-    if (headerRef.current) {
-      gsap.set(headerRef.current, { opacity: 1, y: 0 });
-    }
-
     // Small delay to ensure elements are mounted
     const timer = setTimeout(() => {
-      // Animate header on mount
-      if (headerRef.current) {
-        gsap.from(headerRef.current, {
-          y: -50,
-          opacity: 0,
-          duration: 0.6,
-          ease: "power3.out",
-        });
-      }
-
       if (navRef.current) {
         const children = Array.from(navRef.current.children);
         children.forEach((child, index) => {
@@ -47,11 +34,43 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+
+          // Check if scrolled past threshold
+          setIsScrolled(currentScrollY > 50);
+
+          // Only hide/show on desktop (not mobile)
+          if (window.innerWidth >= 768) {
+            // Scrolling down - hide header
+            if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+              setIsHeaderVisible(false);
+            }
+            // Scrolling up - show header
+            else if (currentScrollY < lastScrollY.current) {
+              setIsHeaderVisible(true);
+            }
+            // At top of page - always show
+            if (currentScrollY < 10) {
+              setIsHeaderVisible(true);
+            }
+          } else {
+            // Always show on mobile
+            setIsHeaderVisible(true);
+          }
+
+          lastScrollY.current = currentScrollY;
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -66,7 +85,10 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-md transition-all duration-300 ${
+      style={{
+        transform: isHeaderVisible ? "translateY(0)" : "translateY(-100%)",
+      }}
+      className={`fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-md transition-transform duration-300 ease-in-out ${
         isScrolled ? "py-3 shadow-lg" : "py-4"
       }`}
     >
